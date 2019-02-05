@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class APIApplication {
+public class BadTwitter {
 
     public static void main(String... args) {
-        SpringApplication.run(APIApplication.class, args);
+        SpringApplication.run(BadTwitter.class, args);
     }
 }
