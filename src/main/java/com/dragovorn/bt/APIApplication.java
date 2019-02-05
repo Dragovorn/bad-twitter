@@ -1,4 +1,4 @@
-package com.dragovorn.bt.api;
+package com.dragovorn.bt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.dragovorn.bt.api.controller;
+package com.dragovorn.bt.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
