@@ -7,13 +7,13 @@
     <body>
         <h1>Create your account!</h1>
         <br>
-        <form>
+        <form action="/create_account" method="post">
             <fieldset>
                 <legend>Required Fields</legend>
                 Email: <input type="text" name="email" placeholder="Email" required><br>
                 Username: <input type="text" name="username" placeholder="Username" required><br>
-                Password: <input type="password" name="password" placeholder="Password" required><br>
-                Confirm Password: <input type="password" name="confirm_password" placeholder="Confirm Password" required><br>
+                Password: <input type="password" name="password" placeholder="Password" id="password" required><br>
+                Confirm Password: <input type="password" name="confirm_password" placeholder="Confirm Password" id="confirm_password" required><br>
             </fieldset>
             <fieldset>
                 <legend>Optional Fields</legend>
@@ -21,6 +21,10 @@
                 Last Name: <input type="text" name="last_name" placeholder="Last Name"><br>
                 Birth-date: <input type="date" name="birth_date" placeholder="Birth-date"><br>
             </fieldset>
+            <input type="checkbox" required> I am over 13 years of age.<br>
+            <input type="submit" value="Create Account">
         </form>
+
+        <script th:src="@{/js/src/confirmPassword.js}"></script>
     </body>
 </html>
