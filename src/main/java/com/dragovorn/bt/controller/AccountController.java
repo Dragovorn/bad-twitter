@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,13 @@ public class AccountController {
     }
 
     @PostMapping(value = "/create_account", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createAccountPOST(RedirectAttributes redirectAttributes, @RequestParam("email") String email, @RequestParam("username") String username, @RequestParam("password") String password) {
+    public String createAccountPOST(RedirectAttributes redirectAttributes,
+                                    @RequestParam("email") String email,
+                                    @RequestParam("username") String username,
+                                    @RequestParam("password") String password,
+                                    @RequestParam(value = "first_name", required = false) String firstName,
+                                    @RequestParam(value = "last_name", required = false) String lastName,
+                                    @RequestParam(value = "birth_date", required = false) Date birthDate) {
         CreatedUser user = new CreatedUser(email, username, password);
 
         System.out.println(user);
