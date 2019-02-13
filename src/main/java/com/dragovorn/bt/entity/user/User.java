@@ -1,10 +1,13 @@
 package com.dragovorn.bt.entity.user;
 
+import com.dragovorn.bt.json.adapter.UserTypeAdapter;
 import com.dragovorn.bt.util.Hashing;
+import com.google.gson.annotations.JsonAdapter;
 
 import java.util.Date;
 import java.util.UUID;
 
+@JsonAdapter(UserTypeAdapter.class)
 public class User {
 
     private final UUID uid;
@@ -40,6 +43,50 @@ public class User {
         } else {
             this.displayName = this.firstName + " " + this.lastName;
         }
+    }
+
+    public UUID getUID() {
+        return this.uid;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public String getDisplayName() {
+        return this.displayName;
+    }
+
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
+
+    public boolean hasBirthDate() {
+        return this.birthDate != null;
+    }
+
+    public boolean hasFirstName() {
+        return this.firstName != null;
+    }
+
+    public boolean hasLastName() {
+        return this.lastName != null;
     }
 
     public static class Builder {

@@ -1,56 +1,27 @@
 package com.dragovorn.bt.controller;
 
-import com.dragovorn.bt.entity.user.CreatedUser;
+import com.dragovorn.bt.entity.user.User;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-@Controller
+@RestController
+@RequestMapping("/accounts")
 public class AccountController {
 
-    private static Map<Integer, CreatedUser> users = new HashMap<>();
-
-    @GetMapping("/create_account")
-    public String createAccountGET(@CookieValue(value = "sessionId", required = false) String sessionId) {
-        if (sessionId != null) {
-            return "redirect:/";
-        }
-
-        return "create-account";
-    }
-
-    @PostMapping(value = "/create_account", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createAccountPOST(RedirectAttributes redirectAttributes,
-                                    @RequestParam("email") String email,
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public User createAccount(@RequestParam("email") String email,
                                     @RequestParam("username") String username,
                                     @RequestParam("password") String password,
                                     @RequestParam(value = "first_name", required = false) String firstName,
                                     @RequestParam(value = "last_name", required = false) String lastName,
-                                    @RequestParam(value = "birth_date", required = false) Date birthDate) {
-        CreatedUser user = new CreatedUser(email, username, password);
-
-        System.out.println(user);
-
-        redirectAttributes.addAttribute("created", true);
-
-        return "redirect:/login";
-    }
-
-    @GetMapping("/login")
-    public String loginGET() {
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public void loginPOST() {
-
+                                    @RequestParam(value = "birth_date", required = false) @DateTimeFormat(pattern="MM/dd/yyyy") @Valid Date birthDate) {
+        return User.builder().setEmail(email).setUsername(username).setPassword(password).setName(firstName, lastName).setBirthDate(birthDate).build();
     }
 }

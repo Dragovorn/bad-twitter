@@ -6,11 +6,12 @@ import co.melondev.Inquire.info.DatabaseInfo;
 import co.melondev.Inquire.info.IDatabaseInfo;
 import com.dragovorn.bt.util.DatabaseUtil;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import javax.annotation.PostConstruct;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 
 @SpringBootApplication
+@EnableAutoConfiguration(exclude = {JacksonAutoConfiguration.class})
 public class BadTwitter {
 
     private static IDatabaseManager manager;
@@ -26,5 +27,10 @@ public class BadTwitter {
                 .build();
 
         manager = new DatabaseManager(info);
+        DatabaseUtil.init(manager);
+    }
+
+    public static IDatabaseManager getManager() {
+        return manager;
     }
 }
