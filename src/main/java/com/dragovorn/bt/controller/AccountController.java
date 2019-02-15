@@ -16,12 +16,16 @@ import java.util.Date;
 public class AccountController {
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public User createAccount(@RequestParam("email") String email,
-                                    @RequestParam("username") String username,
-                                    @RequestParam("password") String password,
-                                    @RequestParam(value = "first_name", required = false) String firstName,
-                                    @RequestParam(value = "last_name", required = false) String lastName,
-                                    @RequestParam(value = "birth_date", required = false) @DateTimeFormat(pattern="MM/dd/yyyy") @Valid Date birthDate) {
-        return User.builder().setEmail(email).setUsername(username).setPassword(password).setName(firstName, lastName).setBirthDate(birthDate).build();
+    public Object createAccount(@RequestParam("email") String email,
+                                @RequestParam("username") String username,
+                                @RequestParam("password") String password,
+                                @RequestParam(value = "first_name", required = false) String firstName,
+                                @RequestParam(value = "last_name", required = false) String lastName,
+                                @RequestParam(value = "birth_date", required = false) @DateTimeFormat(pattern="MM/dd/yyyy") @Valid Date birthDate) {
+        User user = User.builder().setEmail(email).setUsername(username).setPassword(password).setName(firstName, lastName).setBirthDate(birthDate).build();
+
+        // TODO: make this take a recapta, problem with writing that implementation is that i need to set it up
+
+        return user;
     }
 }
